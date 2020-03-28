@@ -1,0 +1,47 @@
+
+body {
+  background-image: url('../../asset/images/mack\ 24\ hostel.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  
+  width:720px;
+
+}
+
+
+
+
+.signup-form{
+  border:2px solid;
+  padding:30px;
+  border-radius:5px;
+  margin-top:40px;
+  background:#f7f6f6;
+  margin-left:400px;
+  margin-right:-400px;
+ 
+}
+
+.eden{
+  border:2px solid;
+  padding:30px;
+  border-radius:5px;
+  margin-top:40px;
+  background:#f7f6f6;
+  margin-left:400px;
+  margin-right:-400px;
+
+}
+
+.table{
+  border:2px solid;
+  padding:30px;
+  border-radius:5px;
+  margin-top:40px;
+  background:#f7f6f6;
+  margin-left:400px;
+  margin-right:-400px;
+}
+
+

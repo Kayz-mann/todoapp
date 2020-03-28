@@ -1,0 +1,50 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>todoapp</title>
+      
+        <link href="{% static 'asset/css/style.css' %}"  rel="stylesheet">
+        <link href="{% static 'asset/bootstrap4/css/bootstrap.min.css' %}"  rel="stylesheet">
+        <link href="{% static 'asset/fontawesome5/css/all.css' %}"  rel="stylesheet">
+        
+    </head>
+    <body>
+    
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Todoapp</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+
+                {% if user.is_authenticated %}
+                <a href="{% url 'todo' %}"><span class="nav-item nav-link">Todos</span></a>
+                <span class="nav-item nav-link">Welcome{{user.first_name}}</span>
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <input type="submit" value="logout">
+                </form>
+                {% else %}
+                <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-item nav-link" href="{% url 'signup' %}">Signup</a>
+                
+                {% endif %}
+              </div>
+            </div>
+          </nav>
+          {% block content %}
+
+          {% endblock %}
+       
+        
+        
+       
+        <script src="{% static 'asset/js/jquery.js' %}"></script>
+        <script src="{% static 'asset/bootstrap4/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'asset/fontawesome5/js/all.js' %}"></script>
+   
+    </body>
+</html>

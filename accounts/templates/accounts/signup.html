@@ -1,0 +1,59 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<div class="container">
+    <div class="col-md-5">
+        <!--if there is error in our form value print the error here-->
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for field in form %}
+              {{field.errors}}
+            {% endfor %}
+
+        </div>
+        {% endif %}
+
+        <!--The messages attribute stores the message you have provided in  your views.py-->
+        {% if messages %}
+           <div class="alert alert-info" role="alert">
+               {% for message in messages %}
+                 {{message}}
+               {% endfor %}
+           </div>
+        {% endif %}
+
+        <!--{% for user in users %}
+        <p>{{user.first_name}} - {{user.last_name}} username: {{user.username}}</p>  {% endfor %}-->
+
+            
+
+        <form method="POST" action="{% url 'signup' %} " class="signup-form" >
+            <!---csrf token validates the form data is from a valid form,-->
+            {% csrf_token %}
+            
+            <h1> sign up page</h1>
+
+            <label> Username</label>
+            <input class="form-control" type="text" placeholder="Username" name="username">
+            
+            <label> Firstname</label>
+            <input class="form-control" type="text" placeholder="Firstname" name="first_name">
+            
+            <label> Lastname</label>
+            <input class="form-control" type="text" placeholder="Lastname" name="last_name">
+            
+            <label> Password</label>
+            <input class="form-control" type="password" placeholder="Password" name="password1">
+            <label>Confirm Password</label>
+            <input class="form-control" type="password" placeholder="Confirm Password" name="password2">
+            <br>
+            <button class="btn btn-info">Sign up</button>
+        </form>
+       
+    </div>
+</div>
+
+{% endblock %}
+
+

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="col-md-5">
+    {% if messages %}
+    <div class="alert alert-info" role="alert">
+      {% for message in messages %}
+        {{message}}
+      {% endfor %}
+    </div>
+    {% endif %}
+   
+    <form method="POST" action="{% url 'login' %}">
+      
+      {% csrf_token %}
+      <h1>Login page</h1>
+
+      <label>Username</label>
+      <input class="form-control" type="text" placeholder="Username" name="username">
+
+      <label>Password</label>
+      <input class="form-control" type="text" placeholder="Password" name="password1">
+
+      <br>
+      <button class="btn btn-info">Login</button>
+    </form>
+
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+

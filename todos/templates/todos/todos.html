@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container" style="padding-top: 30px;">
+
+    <!-- if there is error in our form value print the error here -->
+    {% if form.errors %}
+      <div class="alert alert-danger" role="alert">
+      {% for field in form %}
+        {{field.errors}}
+      {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- The messages attribute stores the message you have provided in your views.py -->
+    {% if messages %}
+      <div class="alert alert-info" role="alert">
+        {% for message in messages %}
+          {{message}}
+        {% endfor %}
+      </div>
+    {% endif %}
+    <section class="just-background"></section>
+    <form method="POST" action="{% url 'todo' %}" class="eden">
+      {% csrf_token %} 
+    <div class="row">
+      <div class="col-md-6">
+        <input class="form-control" name="description" required Placeholder="Describe Todo">
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-info" type="submit">Create</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="container">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Description</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for todo in todos %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{todo.description}}</td>
+          
+          <td>
+            <div class="row">
+              <div class="col-md-3">
+            <button data-toggle="modal" class="btn btn-info btn-sm " data-target="#todoModal{{todo.id}}">
+              update
+            </button>
+            </div>
+            <form method="POST" class="col-md-3" action="{% url 'delete_todo' todo.id  %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-info btn-sm">Delete</button>
+            </form>
+            </div>
+          </td>
+        </tr>
+
+        {% empty %}
+          <tr>
+            <td colspan="3">
+              <center> Todo is empty at this time</center>
+            </td>
+          </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</section>
+
+
+
+
+
+
+<!-- Modal -->
+{% for todo in todos %}
+<div class="modal fade" id="todoModal{{todo.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Todo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{% url 'update_todo' todo.id %}" method="POST">
+        {% csrf_token %}
+        <div class="modal-body">
+          <input class="form-control" value="{{todo.description}}" name="description" required Placeholder="Update Todo">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-info">Update changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}
