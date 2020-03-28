@@ -25,7 +25,7 @@ SECRET_KEY = 'q%ikvfh51_4)0c=at-63a$(j-e&#%u=pm!6b@4dl(v)sxv)drg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'todoapp.wsgi.application'
+WSGI_APPLICATION = 'todoapp.wsgi.application
 
 
 # Database

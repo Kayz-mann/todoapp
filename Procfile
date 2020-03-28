@@ -1,0 +1,1 @@
+WSGI_APPLICATION = 'todoapp.wsgi.application'
